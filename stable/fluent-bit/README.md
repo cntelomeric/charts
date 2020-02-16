@@ -93,6 +93,7 @@ The following table lists the configurable parameters of the Fluent-Bit chart an
 | `audit.enable`                     | Enable collection of audit logs                         | `false`                             |
 | `audit.input.memBufLimit`          | Specify Mem_Buf_Limit in tail input                     | `35mb`                              |
 | `audit.input.parser`               | Specify Parser in tail input                            | `docker`                            |
+| `audit.input.tag`                  | Specify Tag in tail input                               | `audit.*`                           |
 | `audit.input.path`                 | Specify log file(s) through the use of common wildcards | `/var/log/kube-apiserver-audit.log` |
 | `audit.input.bufferChunkSize`      | Specify Buffer_Chunk_Size in tail                       | `2MB`                               |
 | `audit.input.bufferMaxSize`        | Specify Buffer_Max_Size in tail                         | `10MB`                              |
@@ -121,7 +122,7 @@ The following table lists the configurable parameters of the Fluent-Bit chart an
 | `filter.mergeLogKey`               | If set, append the processed log keys under a new root key specified by this variable. | `nil` |
 | `filter.useJournal`                | If true, the filter reads logs coming in Journald format.  | `false` |
 | `image.fluent_bit.repository`      | Image                                      | `fluent/fluent-bit`                               |
-| `image.fluent_bit.tag`             | Image tag                                  | `1.3.5`                                           |
+| `image.fluent_bit.tag`             | Image tag                                  | `1.3.7`                                           |
 | `image.pullPolicy`                 | Image pull policy                          | `Always`                                          |
 | `nameOverride`                     | Override name of app                   | `nil`                                        |
 | `fullnameOverride`                 | Override full name of app              | `nil`                                        |
