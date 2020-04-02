@@ -10,7 +10,7 @@ $ helm install stable/home-assistant
 
 ## Introduction
 
-This code is adopted for [the official home assistant docker image](https://hub.docker.com/r/homeassistant/home-assistant/)
+This code is adapted for [the official home assistant docker image](https://hub.docker.com/r/homeassistant/home-assistant/)
 
 ## Installing the Chart
 
@@ -36,7 +36,7 @@ The following tables lists the configurable parameters of the Home Assistant cha
 | Parameter                  | Description                         | Default                                                 |
 |----------------------------|-------------------------------------|---------------------------------------------------------|
 | `image.repository`         | Image repository | `homeassistant/home-assistant` |
-| `image.tag`                | Image tag. Possible values listed [here](https://hub.docker.com/r/homeassistant/home-assistant/tags/).| `0.103.3`|
+| `image.tag`                | Image tag. Possible values listed [here](https://hub.docker.com/r/homeassistant/home-assistant/tags/).| `0.106.6`|
 | `image.pullPolicy`         | Image pull policy | `IfNotPresent` |
 | `image.pullSecrets`        | Secrets to use when pulling the image | `[]` |
 | `strategyType`             | Specifies the strategy used to replace old Pods by new ones | `Recreate` |
@@ -56,11 +56,14 @@ The following tables lists the configurable parameters of the Home Assistant cha
 | `probes.startup.periodSeconds`      | Specify startup `periodSeconds` parameter for the deployment      | `10` |
 | `service.type`             | Kubernetes service type for the home-assistant GUI | `ClusterIP` |
 | `service.port`             | Kubernetes port where the home-assistant GUI is exposed| `8123` |
+| `service.portName`         | Kubernetes port name where the home-assistant GUI is exposed | `api` |
+| `service.additionalPorts`  | Add additional ports exposed by the home assistant container integrations. Example homematic needs to expose a proxy port | `{}` |
 | `service.annotations`      | Service annotations for the home-assistant GUI | `{}` |
 | `service.clusterIP`   | Cluster IP for the home-assistant GUI | `` |
 | `service.externalIPs`   | External IPs for the home-assistant GUI | `[]` |
 | `service.loadBalancerIP`   | Loadbalancer IP for the home-assistant GUI | `` |
 | `service.loadBalancerSourceRanges`   | Loadbalancer client IP restriction range for the home-assistant GUI | `[]` |
+| `service.publishNotReadyAddresses`   | Set to true if the editors (vscode or configurator) should be reachable when home assistant does not run | `false` |
 | `hostNetwork`              | Enable hostNetwork - might be needed for discovery to work | `false` |
 | `service.nodePort`   | nodePort to listen on for the home-assistant GUI | `` |
 | `ingress.enabled`              | Enables Ingress | `false` |
@@ -148,6 +151,15 @@ The following tables lists the configurable parameters of the Home Assistant cha
 | `podAnnotations`            | Key-value pairs to add as pod annotations  | `{}` |
 | `extraVolumes`            | Any extra volumes to define for the pod  | `{}` |
 | `extraVolumeMounts`       | Any extra volumes mounts to define for each container of the pod  | `{}` |
+| `monitoring.enabled`                          | Enables Monitoring support | `false` |
+| `monitoring.serviceMonitor.enabled`           | Setup a ServiceMonitor to configure scraping | `false` |
+| `monitoring.serviceMonitor.namespace`         | Set the namespace the ServiceMonitor should be deployed | `false` |
+| `monitoring.serviceMonitor.interval`          | Set how frequently Prometheus should scrape | `30` |
+| `monitoring.serviceMonitor.labels`            | Set labels for the ServiceMonitor, use this to define your scrape label for Prometheus Operator | `{}` |
+| `monitoring.serviceMonitor.bearerTokenFile`   | Set bearerTokenFile for home-assistant auth (use long lived access tokens) | `nil` |
+| `monitoring.serviceMonitor.bearerTokenSecret` | Set bearerTokenSecret for home-assistant auth (use long lived access tokens) | `nil` |
+
+
 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
